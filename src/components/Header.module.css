@@ -29,6 +29,7 @@
     display: inline-block;
     height: 17px;
     width: 14px;
-    /* background: url('../Assets/usuario.svg') no-repeat center center; */
+    background: url('../Assets/usuario.svg') no-repeat center center;
     margin-left: 0.5rem;
+    translate: 0 -3px;
   }
