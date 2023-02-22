@@ -1,45 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "../Forms/Button/Index";
 import Input from "../Forms/Input";
 import styles from "./Login.module.css";
 import stylesBtn from "../Forms/Button/Button.module.css";
+import useForm from "../../Hooks/useForm";
+import { GET_TOKEN, GET_USER } from "../../api";
 
 function LoginForm() {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const username = useForm();
+  const password = useForm();
 
-  function handleSubmit(e) {
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (token) {
+      get_user();
+    }
+  }, []);
+
+  async function get_user() {
+    const token = window.localStorage.getItem("token");
+    const { url, options } = GET_USER(token);
+
+    const resp = await fetch(url, options);
+    const data = await resp.json();
+    console.log("user: ", data);
+  }
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    fetch("https://dogsapi.origamid.dev/json/jwt-auth/v1/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => console.log(data));
+    if (username.validate() && password.validate) {
+      const { url, options } = GET_TOKEN({
+        username: username.value,
+        password: password.value,
+      });
+      const resp = await fetch(url, options);
+      const data = await resp.json();
+      console.log(data);
+      window.localStorage.setItem("token", data.token);
+      get_user();
+    }
   }
 
   return (
     <section className="animeLeft">
       <h1 className="title">Login</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <Input
-          label="Usuário"
-          type="text"
-          name="username"
-          value={username}
-          onChange={({ target }) => setUsername(target.value)}
-        />
-        <Input
-          label="Senha"
-          type="password"
-          name="password"
-          value={password}
-          onChange={({ target }) => setPassword(target.value)}
-        />
+        <Input label="Usuário" type="text" name="username" {...username} />
+        <Input label="Senha" type="password" name="password" {...password} />
         <Button>Entrar</Button>
       </form>
       <br />
