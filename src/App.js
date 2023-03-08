@@ -1,30 +1,35 @@
-import { useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Home from "./components/Home";
-import Login from "./components/Login/Login";
 import { useDispatch } from "react-redux";
-import { autoLogin } from "./Redux/user/userSlice";
+import Layout from "./components/Layout";
+import Home from "./components/Home";
+import LoginForm from "./components/Login/LoginForm";
+import LoginCreate from "./components/Login/LoginCreate";
+import LoginPasswordLost from "./components/Login/LoginPasswordLost";
+import LoginPasswordReset from "./components/Login/LoginPasswordReset";
+// import { autoLogin } from "./Redux/user/userSlice";
 
 function App() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(autoLogin());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(autoLogin());
+  // }, [dispatch]);
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login/*" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+
+          <Route path="/login">
+            <Route index element={<LoginForm />} />
+            <Route path="perdeu" element={<LoginPasswordLost />} />
+            <Route path="criar" element={<LoginCreate />} />
+            <Route path="resetar" element={<LoginPasswordReset />} />
+          </Route>
+        </Route>
+      </Routes>
     </div>
   );
 }
