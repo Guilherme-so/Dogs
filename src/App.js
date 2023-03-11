@@ -1,20 +1,22 @@
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
-import { useDispatch } from "react-redux";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
 import LoginForm from "./components/Login/LoginForm";
 import LoginCreate from "./components/Login/LoginCreate";
 import LoginPasswordLost from "./components/Login/LoginPasswordLost";
 import LoginPasswordReset from "./components/Login/LoginPasswordReset";
-// import { autoLogin } from "./Redux/user/userSlice";
+import "./App.css";
+import { useDispatch } from "react-redux";
+import { autoLogin } from "./Redux/user/userSlice";
+
 
 function App() {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(autoLogin());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(autoLogin());
+  }, [dispatch]);
 
   return (
     <div className="App">

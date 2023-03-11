@@ -102,3 +102,23 @@ input {
 .AppBody {
   flex: 1;
 }
+
+.error {
+  color: rgb(245, 95, 95);
+  margin-top: 10px;
+}
+
+.loading {
+  margin: auto;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 5px dotted #fff;
+  animation: loading .5s infinite;
+}
+
+@keyframes loading {
+  to {
+    rotate: 360deg;
+  }
+}
