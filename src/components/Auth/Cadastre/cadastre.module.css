@@ -1,14 +1,14 @@
-.login {
+.cadastre {
     display: grid;
     grid-template-columns: 1fr 1fr;
     min-height: 100vh;
     gap: 2rem;
   }
   
-  .login::before {
+  .cadastre::before {
     content: '';
     display: block;
-    background: url('../../Assets/login.jpg') no-repeat center center;
+    background: url('../../../Assets/login.jpg') no-repeat center center;
     background-size: cover;
   }
   

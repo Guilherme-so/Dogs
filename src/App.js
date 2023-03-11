@@ -2,14 +2,13 @@ import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
-import LoginForm from "./components/Login/LoginForm";
-import LoginCreate from "./components/Login/LoginCreate";
-import LoginPasswordLost from "./components/Login/LoginPasswordLost";
-import LoginPasswordReset from "./components/Login/LoginPasswordReset";
+import LoginForm from "./components/Auth/Login/index.jsx";
+import LoginPasswordLost from "./components/Auth/PasswordLost";
+import LoginCreate from "./components/Auth/Cadastre";
+import LoginPasswordReset from "./components/Auth/PasswordReset";
 import "./App.css";
 import { useDispatch } from "react-redux";
 import { autoLogin } from "./Redux/user/userSlice";
-
 
 function App() {
   const dispatch = useDispatch();

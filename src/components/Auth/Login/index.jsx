@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, Navigate } from "react-router-dom";
-import Button from "../Forms/Button/Index";
-import Input from "../Forms/Input";
+import Button from "../../Forms/Button/Index";
+import Input from "../../Forms/Input";
 import styles from "./Login.module.css";
-import stylesBtn from "../Forms/Button/Button.module.css";
-import useForm from "../../Hooks/useForm";
+import stylesBtn from "../../Forms/Button/Button.module.css";
+import useForm from "../../../Hooks/useForm";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,7 +13,7 @@ import {
   selectUserError,
   selectUserStatus,
   selectUserToken,
-} from "../../Redux/user/userSlice";
+} from "../../../Redux/user/userSlice";
 
 function LoginForm() {
   const username = useForm();

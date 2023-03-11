@@ -2,7 +2,7 @@ import React from "react";
 
 const validacao = {
   email: {
-    regex: /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i,
+    regex: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$/,
     message: "preencha um email válido",
   },
   password: {
@@ -39,7 +39,6 @@ const useForm = (type) => {
     setValue(target.value);
   };
 
-  
   return {
     value,
     setValue,
