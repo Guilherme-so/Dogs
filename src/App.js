@@ -8,7 +8,7 @@ import LoginCreate from "./components/Auth/Cadastre";
 import LoginPasswordReset from "./components/Auth/PasswordReset";
 import "./App.css";
 import { useDispatch } from "react-redux";
-import { autoLogin } from "./Redux/user/userSlice";
+import { autoLogin } from "./Redux/user/authAsyncActions";
 
 function App() {
   const dispatch = useDispatch();

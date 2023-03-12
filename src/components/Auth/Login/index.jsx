@@ -8,12 +8,11 @@ import useForm from "../../../Hooks/useForm";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getUserData,
-  Login,
   selectUserError,
   selectUserStatus,
   selectUserToken,
 } from "../../../Redux/user/userSlice";
+import { getUserData, Login } from "../../../Redux/user/authAsyncActions";
 
 function LoginForm() {
   const username = useForm();

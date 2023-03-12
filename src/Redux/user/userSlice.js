@@ -1,51 +1,5 @@
-import axios from "../../components/Helpers/customAxios";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-export const autoLogin = createAsyncThunk(
-  "auth/autoLogin",
-  async (_, { getState, dispatch, rejectWithValue }) => {
-    const { auth } = getState();
-    if (auth.token) {
-      try {
-        const response = await axios.post("/jwt-auth/v1/token/validate");
-        dispatch(getUserData());
-      } catch (error) {
-        dispatch(logout());
-        rejectWithValue(error.response.data.code);
-      }
-    }
-  }
-);
-
-export const getUserData = createAsyncThunk(
-  "auth/GetUserData",
-  async (_, thunk) => {
-    const state = thunk.getState();
-    if (state.auth.token) {
-      try {
-        const response = await axios.get("/api/user", {
-          headers: {
-            Authorization: `Bearer ${state.auth.token}`,
-          },
-        });
-        return response.data;
-      } catch (error) {
-        return thunk.rejectWithValue(error);
-      }
-    }
-  }
-);
-
-export const Login = createAsyncThunk("auth/Login", async (data, thunkAPI) => {
-  try {
-    const response = await axios.post("/jwt-auth/v1/token", data);
-    window.location.replace("/conta");
-    return response.data;
-  } catch (err) {
-    console.log("err", err);
-    return thunkAPI.rejectWithValue(err);
-  }
-});
+import { createSlice } from "@reduxjs/toolkit";
+import { Login, getUserData, autoLogin, cadastre } from "./authAsyncActions";
 
 const initialState = {
   data: null,
@@ -92,6 +46,18 @@ const userSlice = createSlice({
       .addCase(autoLogin.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.login = true;
+      })
+      .addCase(cadastre.pending, (state, action) => {
+        state.error = null;
+        state.status = "pending";
+      })
+      .addCase(cadastre.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.login = true;
+      })
+      .addCase(cadastre.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload.message;
       });
   },
 });
