@@ -44,8 +44,8 @@ function LoginForm() {
     }
   }
 
-  if (token) return <Navigate to="/conta" />;
-
+  if (token) return <Navigate to="/conta" replace />;
+  
   return (
     <section className={`${styles.login} animeLeft`}>
       <div className={styles.forms}>
