@@ -28,29 +28,17 @@
   outline: none;
 }
 
-/* active react way */
-.nav a:global(.active) {
+.active {
   background: white;
   box-shadow: 0 0 0 3px #fea;
   border-color: #fb1;
 }
 
-.nav a:glogal(.active) svg > * {
+.active svg > * {
   fill: #fb1;
 }
 
-/* active next way */
-/* .nav a.active {
-  background: white;
-  box-shadow: 0 0 0 3px #fea;
-  border-color: #fb1;
-}
-
-.nav a.active.svg > * {
-  fill: #fb1;
-} */
-
-.mobileButton {
+.toogleMenuMobile {
   background: #eee;
   width: 40px;
   height: 40px;
@@ -64,7 +52,7 @@
   transition: 0.1s;
 }
 
-.mobileButton::after {
+.toogleMenuMobile::after {
   content: "";
   display: block;
   width: 1.2rem;
@@ -75,16 +63,16 @@
   transition: 0.2s;
 }
 
-.mobileButton:hover,
-.mobileButton:focus,
-.mobileButtonActive {
+.toogleMenuMobile:hover,
+.toogleMenuMobile:focus,
+.toogleMenuMobileActive {
   outline: none;
   background: white;
   box-shadow: 0 0 0 3px #fea;
   color: #fb1;
 }
 
-.mobileButtonActive::after {
+.toogleMenuMobileActive::after {
   width: 4px;
   height: 4px;
   box-shadow: 0 8px currentColor, 0 -8px currentColor;
@@ -94,7 +82,7 @@
 .navMobile {
   display: block;
   position: absolute;
-  top: 70px;
+  top: 100px;
   right: 0px;
   padding: 0 1rem;
   background: white;
