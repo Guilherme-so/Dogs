@@ -5,7 +5,6 @@ import { logout } from "./userSlice";
 export const Login = createAsyncThunk("auth/Login", async (data, thunkAPI) => {
   try {
     const response = await axios.post("/jwt-auth/v1/token", data);
-    window.location.replace("/conta");
     return response.data;
   } catch (err) {
     console.log("err", err);
@@ -57,6 +56,24 @@ export const cadastre = createAsyncThunk(
       if (response.status) {
         dispatch(Login({ username: username, password: password }));
       }
+      return response.data;
+    } catch (error) {
+      console.log("error: ", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const postFoto = createAsyncThunk(
+  "user/postFoto",
+  async (formData, { getState, rejectWithValue }) => {
+    const state = getState();
+    try {
+      const response = await axios.post("/api/photo", formData, {
+        headers: {
+          Authorization: `Bearer ${state.auth.token}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.log("error: ", error.response.data);

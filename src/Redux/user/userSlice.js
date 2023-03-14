@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Login, getUserData, autoLogin, cadastre } from "./authAsyncActions";
+import {
+  Login,
+  getUserData,
+  autoLogin,
+  cadastre,
+  postFoto,
+} from "./authAsyncActions";
 
 const initialState = {
   data: null,
@@ -31,6 +37,8 @@ const userSlice = createSlice({
         state.login = true;
         state.token = action.payload.token;
         window.localStorage.setItem("token", action.payload.token);
+        window.location.replace("/conta");
+
       })
       .addCase(Login.rejected, (state, action) => {
         state.status = "failed";
@@ -57,6 +65,18 @@ const userSlice = createSlice({
       })
       .addCase(cadastre.rejected, (state, action) => {
         state.status = "failed";
+        state.error = action.payload.message;
+      })
+      .addCase(postFoto.pending, (state, action) => {
+        state.error = null;
+        state.status = "pending";
+      })
+      .addCase(postFoto.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        window.location.href = "/conta";
+      })
+      .addCase(postFoto.rejected, (state, action) => {
+        state.status = "rejected";
         state.error = action.payload.message;
       });
   },
