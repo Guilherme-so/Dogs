@@ -111,3 +111,26 @@ export const foto_Get = createAsyncThunk(
     }
   }
 );
+
+export const foto_comment = createAsyncThunk(
+  "user/foto_comment",
+  async ({ id, comment }, { getState, rejectWithValue }) => {
+    const state = getState();
+    try {
+      const response = await axios.post(
+        `/api/comment/${id}`,
+        { comment },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${state.auth.token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log("error: ", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

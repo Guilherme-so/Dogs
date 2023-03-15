@@ -7,6 +7,7 @@ import {
   postFoto,
   fotos_Get,
   foto_Get,
+  foto_comment,
 } from "./authAsyncActions";
 
 const initialState = {
@@ -112,6 +113,14 @@ const userSlice = createSlice({
       .addCase(foto_Get.rejected, (state, action) => {
         state.modalStatus = "rejected";
         state.modalError = action.payload.message;
+      })
+      .addCase(foto_comment.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        console.log(action.payload);
+      })
+      .addCase(foto_comment.rejected, (state, action) => {
+        state.status = "rejected";
+        console.log(action.payload);
       });
   },
 });

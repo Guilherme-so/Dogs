@@ -20,7 +20,7 @@ function FeedModal() {
 
   useEffect(() => {
     dispatch(foto_Get(modal?.id));
-  }, [modal, dispatch]);
+  }, [modal, modalData, dispatch]);
 
   function closeModal(e) {
     if (e.target === e.currentTarget) {

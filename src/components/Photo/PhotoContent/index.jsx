@@ -8,7 +8,7 @@ import PhotoComments from "../PhotoComments";
 
 const PhotoContent = () => {
   const modalData = useSelector(selectGetModalData);
-  const { photo, comments } = modalData;
+  const { photo } = modalData;
 
   return (
     <div className={`${styles.photo}`}>
@@ -30,8 +30,7 @@ const PhotoContent = () => {
           </ul>
         </div>
       </div>
-
-      <PhotoComments id={photo.id} comments={comments} />
+      <PhotoComments id={photo.id} />
     </div>
   );
 };
