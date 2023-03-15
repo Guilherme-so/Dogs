@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<ProtectedRoute><Home /></ProtectedRoute>}/>
+          <Route index element={<Home />} />
 
           <Route path="/login">
             <Route index element={<LoginForm />} />
@@ -36,7 +36,7 @@ function App() {
             <Route path="resetar" element={<LoginPasswordReset />} />
           </Route>
 
-          <Route path="/conta" element={<UserLayout><ProtectedRoute /></UserLayout>}>
+          <Route path="/conta"element={<UserLayout><ProtectedRoute /></UserLayout>}>
             <Route index element={<Feed />} />
             <Route path="postar" element={<UserPhotoPost />} />
             <Route path="estatisticas" element={<UserStats />} />

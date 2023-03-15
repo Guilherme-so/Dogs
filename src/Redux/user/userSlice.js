@@ -6,6 +6,7 @@ import {
   cadastre,
   postFoto,
   fotos_Get,
+  foto_Get,
 } from "./authAsyncActions";
 
 const initialState = {
@@ -15,6 +16,10 @@ const initialState = {
   status: "idle", // | "pending" | "succeeded" | "failed"
   error: null,
   fotos: null,
+  modal: null,
+  modalData: null,
+  modalError: null,
+  modalStatus: "idle", // | "pending" | "succeeded" | "failed"
 };
 
 const userSlice = createSlice({
@@ -26,6 +31,12 @@ const userSlice = createSlice({
       state.login = false;
       localStorage.clear();
       window.location.replace("/login");
+    },
+    setModalOpen: (state, action) => {
+      state.modal = action.payload;
+    },
+    setModalClose: (state, action) => {
+      state.modal = null;
     },
   },
   extraReducers: (builder) => {
@@ -85,12 +96,22 @@ const userSlice = createSlice({
       })
       .addCase(fotos_Get.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.fotos = action.payload 
-        console.log(action.payload);
+        state.fotos = action.payload;
       })
       .addCase(fotos_Get.rejected, (state, action) => {
         state.status = "rejected";
         console.log(action.payload);
+      })
+      .addCase(foto_Get.pending, (state, action) => {
+        state.modalStatus = "pending";
+      })
+      .addCase(foto_Get.fulfilled, (state, action) => {
+        state.modalStatus = "succeeded";
+        state.modalData = action.payload;
+      })
+      .addCase(foto_Get.rejected, (state, action) => {
+        state.modalStatus = "rejected";
+        state.modalError = action.payload.message;
       });
   },
 });
@@ -101,7 +122,10 @@ export const selectUserError = (state) => state.auth.error;
 export const selectIsLoggedIn = (state) => state.auth.login;
 export const selectUserToken = (state) => state.auth.token;
 export const selectGetFotos = (state) => state.auth.fotos;
+export const selectGetModal = (state) => state.auth.modal;
+export const selectGetModalData = (state) => state.auth.modalData;
+export const selectGetModalError = (state) => state.auth.modalError;
+export const selectGetModalStatus = (state) => state.auth.modalStatus;
 
-
-export const { logout } = userSlice.actions;
+export const { logout, setModalOpen, setModalClose } = userSlice.actions;
 export default userSlice.reducer;

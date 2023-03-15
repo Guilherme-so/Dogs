@@ -88,7 +88,22 @@ export const fotos_Get = createAsyncThunk(
     // const state = getState();
     try {
       const response = await axios.get(
-        `/api/photo/?_page=${page}&_total=${total}&_user=${user}`);
+        `/api/photo/?_page=${page}&_total=${total}&_user=${user}`
+      );
+      return response.data;
+    } catch (error) {
+      console.log("error: ", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const foto_Get = createAsyncThunk(
+  "user/foto_Get",
+  async (id, { getState, rejectWithValue }) => {
+    // const state = getState();
+    try {
+      const response = await axios.get(`/api/photo/${id}`);
       return response.data;
     } catch (error) {
       console.log("error: ", error.response.data);
