@@ -81,3 +81,18 @@ export const postFoto = createAsyncThunk(
     }
   }
 );
+
+export const fotos_Get = createAsyncThunk(
+  "user/fotos_Get",
+  async ({ page, total, user }, { getState, rejectWithValue }) => {
+    // const state = getState();
+    try {
+      const response = await axios.get(
+        `/api/photo/?_page=${page}&_total=${total}&_user=${user}`);
+      return response.data;
+    } catch (error) {
+      console.log("error: ", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

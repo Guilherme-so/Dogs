@@ -5,6 +5,7 @@ import {
   autoLogin,
   cadastre,
   postFoto,
+  fotos_Get,
 } from "./authAsyncActions";
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   token: window.localStorage.getItem("token") ?? null,
   status: "idle", // | "pending" | "succeeded" | "failed"
   error: null,
+  fotos: null,
 };
 
 const userSlice = createSlice({
@@ -38,7 +40,6 @@ const userSlice = createSlice({
         state.token = action.payload.token;
         window.localStorage.setItem("token", action.payload.token);
         window.location.replace("/conta");
-
       })
       .addCase(Login.rejected, (state, action) => {
         state.status = "failed";
@@ -78,6 +79,18 @@ const userSlice = createSlice({
       .addCase(postFoto.rejected, (state, action) => {
         state.status = "rejected";
         state.error = action.payload.message;
+      })
+      .addCase(fotos_Get.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(fotos_Get.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.fotos = action.payload 
+        console.log(action.payload);
+      })
+      .addCase(fotos_Get.rejected, (state, action) => {
+        state.status = "rejected";
+        console.log(action.payload);
       });
   },
 });
@@ -87,6 +100,8 @@ export const selectUserStatus = (state) => state.auth.status;
 export const selectUserError = (state) => state.auth.error;
 export const selectIsLoggedIn = (state) => state.auth.login;
 export const selectUserToken = (state) => state.auth.token;
+export const selectGetFotos = (state) => state.auth.fotos;
+
 
 export const { logout } = userSlice.actions;
 export default userSlice.reducer;
