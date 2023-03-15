@@ -114,7 +114,7 @@ export const foto_Get = createAsyncThunk(
 
 export const foto_comment = createAsyncThunk(
   "user/foto_comment",
-  async ({ id, comment }, { getState, rejectWithValue }) => {
+  async ({ id, comment }, { getState, rejectWithValue,dispatch }) => {
     const state = getState();
     try {
       const response = await axios.post(
@@ -127,6 +127,7 @@ export const foto_comment = createAsyncThunk(
           },
         }
       );
+      dispatch(foto_Get(id))
       return response.data;
     } catch (error) {
       console.log("error: ", error.response.data);

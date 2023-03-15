@@ -104,6 +104,7 @@ const userSlice = createSlice({
         state.status = "rejected";
         console.log(action.payload);
       })
+
       .addCase(foto_Get.pending, (state, action) => {
         state.modalStatus = "pending";
       })
@@ -115,6 +116,8 @@ const userSlice = createSlice({
         state.modalStatus = "rejected";
         state.modalError = action.payload.message;
       })
+
+
       .addCase(foto_comment.fulfilled, (state, action) => {
         state.status = "succeeded";
       })
