@@ -134,3 +134,21 @@ export const foto_comment = createAsyncThunk(
     }
   }
 );
+
+export const foto_delete = createAsyncThunk(
+  "user/foto_delete",
+  async (id, { getState, rejectWithValue }) => {
+    const state = getState();
+    try {
+      const response = await axios.delete(`/api/photo/${id}`, {
+        headers: {
+          Authorization: `Bearer ${state.auth.token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.log("error: ", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

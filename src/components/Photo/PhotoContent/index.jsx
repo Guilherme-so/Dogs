@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./photoContent.module.css";
 import Image from "../../Helpers/Image/index";
 import { useSelector } from "react-redux";
-import { selectGetModalData } from "../../../Redux/user/userSlice";
+import {
+  selectGetModalData,
+  selectUserData,
+} from "../../../Redux/user/userSlice";
 import PhotoComments from "../PhotoComments";
+import PhotoDelete from "../PhotoDelete";
 
 const PhotoContent = () => {
   const modalData = useSelector(selectGetModalData);
+  const data = useSelector(selectUserData);
   const { photo } = modalData;
 
   return (
@@ -18,7 +23,11 @@ const PhotoContent = () => {
       <div className={styles.details}>
         <div>
           <p className={styles.author}>
-            <Link to={`/perfil/${photo.authot}`}>@{photo.author}</Link>
+            {data && data.username === photo.author ? (
+              <PhotoDelete id={photo.id} />
+            ) : (
+              <Link to={`/perfil/${photo.authot}`}>@{photo.author}</Link>
+            )}
             <span className={styles.visualisacoes}>{photo.acessos}</span>
           </p>
           <h1 className="title">

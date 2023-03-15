@@ -8,6 +8,7 @@ import {
   fotos_Get,
   foto_Get,
   foto_comment,
+  foto_delete,
 } from "./authAsyncActions";
 
 const initialState = {
@@ -116,11 +117,21 @@ const userSlice = createSlice({
       })
       .addCase(foto_comment.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log(action.payload);
       })
       .addCase(foto_comment.rejected, (state, action) => {
         state.status = "rejected";
         console.log(action.payload);
+      })
+      .addCase(foto_delete.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(foto_delete.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        window.location.reload();
+      })
+      .addCase(foto_delete.rejected, (state, action) => {
+        state.status = "rejected";
+        state.error = action.payload.message;
       });
   },
 });
