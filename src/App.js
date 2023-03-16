@@ -9,12 +9,12 @@ import LoginPasswordReset from "./components/Auth/PasswordReset";
 import "./App.css";
 import { useDispatch } from "react-redux";
 import { autoLogin } from "./Redux/user/authAsyncActions";
-import User from "./components/User";
 import ProtectedRoute from "./components/Helpers/ProtectedRoute";
 import UserLayout from "./components/Layout/userLayout";
 import Feed from "./components/Feed";
 import UserPhotoPost from "./components/User/UserPhotoPost";
 import UserStats from "./components/User/UserStats";
+import Photo from "./components/Photo/Photo";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,11 +36,16 @@ function App() {
             <Route path="resetar" element={<LoginPasswordReset />} />
           </Route>
 
-          <Route path="/conta"element={<UserLayout><ProtectedRoute /></UserLayout>}>
+          <Route path="/conta" element={<UserLayout><ProtectedRoute /></UserLayout>}>
             <Route index element={<Feed />} />
             <Route path="postar" element={<UserPhotoPost />} />
             <Route path="estatisticas" element={<UserStats />} />
           </Route>
+
+          <Route path="/foto">
+            <Route path=":id" element={<Photo />} />
+          </Route>
+
         </Route>
       </Routes>
     </div>

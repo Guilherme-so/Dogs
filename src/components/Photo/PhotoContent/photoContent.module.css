@@ -102,3 +102,7 @@
     background: #333;
     margin-top: 5px;
   }
+
+  .title{
+    cursor: pointer;
+  }

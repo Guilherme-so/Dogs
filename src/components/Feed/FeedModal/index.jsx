@@ -20,7 +20,6 @@ function FeedModal() {
   const modalStatus = useSelector(selectGetModalStatus);
   const modalError = useSelector(selectGetModalError);
 
-
   useEffect(() => {
     dispatch(foto_Get(modal?.id));
   }, [modal, dispatch]);

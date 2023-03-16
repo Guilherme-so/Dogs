@@ -1,22 +1,30 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./photoContent.module.css";
 import Image from "../../Helpers/Image/index";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   selectGetModalData,
   selectUserData,
+  setModalClose,
 } from "../../../Redux/user/userSlice";
 import PhotoComments from "../PhotoComments";
 import PhotoDelete from "../PhotoDelete";
 
-const PhotoContent = () => {
+const PhotoContent = ({ single }) => {
+  const router = useNavigate();
+  const dispatch = useDispatch();
   const modalData = useSelector(selectGetModalData);
   const data = useSelector(selectUserData);
   const { photo } = modalData;
 
+  function handleRedirect(id) {
+    dispatch(setModalClose());
+    router(`/foto/${id}`);
+  }
+
   return (
-    <div className={`${styles.photo}`}>
+    <div className={`${styles.photo} ${single && styles.single}`}>
       <div className={styles.img}>
         <Image src={photo.src} alt={photo.title} />
       </div>
@@ -30,8 +38,8 @@ const PhotoContent = () => {
             )}
             <span className={styles.visualisacoes}>{photo.acessos}</span>
           </p>
-          <h1 className="title">
-            <Link to={`/foto/${photo.id}`}>{photo.title}</Link>
+          <h1 className={`${styles.title} title`}>
+            <span onClick={() => handleRedirect(photo.id)}>{photo.title}</span>
           </h1>
           <ul className={styles.attributes}>
             <li>{photo.peso} kg</li>

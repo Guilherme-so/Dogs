@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { selectGetModal } from "../../Redux/user/userSlice";
 import FeedModal from "./FeedModal";
