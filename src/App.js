@@ -16,6 +16,7 @@ import UserPhotoPost from "./components/User/UserPhotoPost";
 import UserStats from "./components/User/UserStats";
 import Photo from "./components/Photo/Photo";
 import UserProfile from "./components/User/UserProfile";
+import NotFound from "./components/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +38,14 @@ function App() {
             <Route path="resetar" element={<LoginPasswordReset />} />
           </Route>
 
-          <Route path="/conta" element={<UserLayout><ProtectedRoute /></UserLayout>}>
+          <Route
+            path="/conta"
+            element={
+              <UserLayout>
+                <ProtectedRoute />
+              </UserLayout>
+            }
+          >
             <Route index element={<Feed />} />
             <Route path="postar" element={<UserPhotoPost />} />
             <Route path="estatisticas" element={<UserStats />} />
@@ -50,6 +58,8 @@ function App() {
           <Route path="/perfil">
             <Route path=":user" element={<UserProfile />} />
           </Route>
+
+          <Route path="*" element={<NotFound />} />
 
         </Route>
       </Routes>
