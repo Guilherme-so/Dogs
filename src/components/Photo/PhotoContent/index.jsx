@@ -18,7 +18,12 @@ const PhotoContent = ({ single }) => {
   const data = useSelector(selectUserData);
   const { photo } = modalData;
 
-  function handleRedirect(id) {
+  function handleRedirectUser(user) {
+    dispatch(setModalClose());
+    router(`/perfil/${user}`);
+  }
+
+  function handleRedirectPhoto(id) {
     dispatch(setModalClose());
     router(`/foto/${id}`);
   }
@@ -34,12 +39,19 @@ const PhotoContent = ({ single }) => {
             {data && data.username === photo.author ? (
               <PhotoDelete id={photo.id} />
             ) : (
-              <Link to={`/perfil/${photo.authot}`}>@{photo.author}</Link>
+              <span
+                className={`${styles.title}`}
+                onClick={() => handleRedirectUser(photo.author)}
+              >
+                @{photo.author}
+              </span>
             )}
             <span className={styles.visualisacoes}>{photo.acessos}</span>
           </p>
           <h1 className={`${styles.title} title`}>
-            <span onClick={() => handleRedirect(photo.id)}>{photo.title}</span>
+            <span onClick={() => handleRedirectPhoto(photo.id)}>
+              {photo.title}
+            </span>
           </h1>
           <ul className={styles.attributes}>
             <li>{photo.peso} kg</li>

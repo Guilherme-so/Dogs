@@ -15,6 +15,7 @@ import Feed from "./components/Feed";
 import UserPhotoPost from "./components/User/UserPhotoPost";
 import UserStats from "./components/User/UserStats";
 import Photo from "./components/Photo/Photo";
+import UserProfile from "./components/User/UserProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,10 @@ function App() {
 
           <Route path="/foto">
             <Route path=":id" element={<Photo />} />
+          </Route>
+
+          <Route path="/perfil">
+            <Route path=":user" element={<UserProfile />} />
           </Route>
 
         </Route>
