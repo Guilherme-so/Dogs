@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./photoContent.module.css";
 import Image from "../../Helpers/Image/index";
 import { useSelector, useDispatch } from "react-redux";

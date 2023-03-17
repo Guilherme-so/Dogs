@@ -3,13 +3,13 @@ import { selectGetModal } from "../../Redux/user/userSlice";
 import FeedModal from "./FeedModal";
 import FeedPhotos from "./FeedPhotos";
 
-function Feed({user}) {
+function Feed({userId}) {
   const modal = useSelector(selectGetModal);
 
   return (
     <div>
       {modal && <FeedModal />}
-      <FeedPhotos user={user}/>
+      <FeedPhotos userId={userId}/>
     </div>
   );
 }

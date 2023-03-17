@@ -33,7 +33,7 @@ function FeedModal() {
   return (
     <div className={styles.modal} onClick={closeModal}>
       {modalError && <p className="error">{modalError}</p>}
-      {modalStatus == "pending" && <Loading />}
+      {modalStatus === "pending" && <Loading />}
       {modalData && <PhotoContent />}
     </div>
   );

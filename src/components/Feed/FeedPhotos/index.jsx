@@ -12,7 +12,7 @@ import Loading from "../../Helpers/Loading";
 import FeedPhotoItem from "./FeedPhotoItem";
 import styles from "./feedPhotos.module.css";
 
-function FeedPhotos({ user }) {
+function FeedPhotos({ userId }) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const data = useSelector(selectUserData);
@@ -20,11 +20,11 @@ function FeedPhotos({ user }) {
   const status = useSelector(selectUserStatus);
   const error = useSelector(selectUserError);
 
-  let render =
+  const render =
     pathname === "/conta"
       ? data?.id
-      : pathname === `/perfil/${user}`
-      ? user
+      : pathname === `/perfil/${userId}`
+      ? userId
       : 0;
 
   useEffect(() => {

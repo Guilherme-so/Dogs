@@ -37,7 +37,7 @@ export const autoLogin = createAsyncThunk(
     const { auth } = getState();
     if (auth.token) {
       try {
-        const response = await axios.post("/jwt-auth/v1/token/validate");
+        await axios.post("/jwt-auth/v1/token/validate");
         dispatch(getUserData());
       } catch (error) {
         dispatch(logout());
@@ -114,7 +114,7 @@ export const foto_Get = createAsyncThunk(
 
 export const foto_comment = createAsyncThunk(
   "user/foto_comment",
-  async ({ id, comment }, { getState, rejectWithValue,dispatch }) => {
+  async ({ id, comment }, { getState, rejectWithValue, dispatch }) => {
     const state = getState();
     try {
       const response = await axios.post(
@@ -127,7 +127,7 @@ export const foto_comment = createAsyncThunk(
           },
         }
       );
-      dispatch(foto_Get(id))
+      dispatch(foto_Get(id));
       return response.data;
     } catch (error) {
       console.log("error: ", error.response.data);

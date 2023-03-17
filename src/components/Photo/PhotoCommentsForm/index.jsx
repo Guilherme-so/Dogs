@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ReactComponent as Enviar } from "../../../Assets/enviar.svg";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { foto_comment } from "../../../Redux/user/authAsyncActions";
 import styles from "./photoCommentsForm.module.css";
 

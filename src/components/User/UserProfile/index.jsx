@@ -9,7 +9,7 @@ function UserProfile() {
   return (
     <section className="container mainContainer">
       <h1 className="title">{user}</h1>
-      <Feed  user={user} />
+      <Feed  userId={user} />
     </section>
   );
 }

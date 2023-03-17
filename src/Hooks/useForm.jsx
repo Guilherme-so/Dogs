@@ -2,6 +2,7 @@ import React from "react";
 
 const validacao = {
   email: {
+    // eslint-disable-next-line
     regex: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$/,
     message: "preencha um email válido",
   },

@@ -7,7 +7,7 @@ const NotFound = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (timeLeft != 0) setTimeLeft(timeLeft - 1);
+      if (timeLeft !== 0) setTimeLeft(timeLeft - 1);
     }, 1000);
 
     return () => clearInterval(interval);
